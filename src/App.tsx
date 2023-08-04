@@ -1,9 +1,10 @@
-
+import MainLayout from "./layout/MainLayout";
+import './Global.css'
 function App() {
 
   return (
-    <div>
-      <h1>Project Run</h1>
+    <div className="app">
+      <MainLayout />
     </div>
   );
 }
