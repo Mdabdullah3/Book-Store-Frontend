@@ -3,20 +3,20 @@ import { Link } from 'react-router-dom';
 import logo from "../../assets/Logo/logo-dark.png"
 const DesktopNav = () => {
     const navigation = <>
-        <li className=' text-black  cursor-pointer'><Link to='/home'
+        <li className=' text-secondary  cursor-pointer'><Link to='/home'
             className='transition-all duration-300 uppercase'> Home</Link></li>
-        <li className=' text-black  cursor-pointer uppercase'><Link to='/corporate'
+        <li className=' text-secondary  cursor-pointer uppercase'><Link to='/corporate'
             className='transition-all duration-300'>About </Link></li>
-        <li className=' text-black  cursor-pointer uppercase'><Link to='/nonprofit'
+        <li className=' text-secondary  cursor-pointer uppercase'><Link to='/nonprofit'
             className='transition-all duration-300'> Shop</Link></li>
     </>
     const navigation2 = <>
-        <li className=' text-black  cursor-pointer'><Link to='/weddings'
+        <li className=' text-secondary cursor-pointer'><Link to='/weddings'
             className='transition-all duration-300 uppercase'> Blog</Link></li>
 
-        <li className=' text-black  cursor-pointer uppercase'><Link to='/social'
+        <li className=' text-secondary  cursor-pointer uppercase'><Link to='/social'
             className='transition-all duration-300'> Contact</Link></li>
-        <li className=' text-black  cursor-pointer uppercase'><Link to='/social'
+        <li className=' text-secondary  cursor-pointer uppercase'><Link to='/social'
             className='transition-all duration-300'> Login</Link></li>
     </>
     return (
