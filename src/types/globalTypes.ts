@@ -1,10 +1,13 @@
-export interface IProduct {
+export interface IBooks {
   _id: number;
   name: string;
+  title: string;
   image: string;
   price: number;
-  features: string[];
+  Author: string;
   status: boolean;
-  rating: number;
+  rating: string;
+  genre: string[];
+  Published: string;
   quantity?: number;
 }

@@ -1,8 +1,8 @@
 import React from 'react';
-import topImg from "../../assets/About/single-image-01.png"
-import about1 from "../../assets/About/icon-01.png"
-import about2 from "../../assets/About/icon-02.png"
-import about3 from "../../assets/About/icon-03.png"
+import topImg from "../assets/About/single-image-01.png"
+import about1 from "../assets/About/icon-01.png"
+import about2 from "../assets/About/icon-02.png"
+import about3 from "../assets/About/icon-03.png"
 import { MdNavigateNext } from 'react-icons/md';
 const About = () => {
     const books = [
@@ -47,14 +47,15 @@ const About = () => {
                                     <img src={book.icon} alt="" />
                                 </div>
                                 <div className=''>
-                                    <p className='text-xl uppercase tracking-widest text-[#696969]'>{book.title}</p>
+                                    <p className='text-lg uppercase tracking-widest text-[#696969]'>{book.title}</p>
                                     <h1 className=' tracking-wider text-4xl font-[500] text-secondary'>{book.name}</h1>
                                 </div>
                             </div>
                             <p className='w-10/12 mt-4 text-left leading-relaxed tracking-wide text-[#7E7E7E]'>{book.des}</p>
-                            <h1 className='text-sm font-semibold text-primary tracking-wider uppercase mt-8 flex items-center gap-3'>View More  <div className='text-primary text-xl flex items-center'> <h1><MdNavigateNext /></h1>
+                            <h1 className=' pb-20 text-sm font-semibold text-primary tracking-wider uppercase mt-8 flex items-center gap-3'>View More  <div className='text-primary text-xl flex items-center'> <h1><MdNavigateNext /></h1>
                                 <h1 className='-ml-4 text-primary'><MdNavigateNext /></h1>
                             </div></h1>
+
                         </div>
                     </div>)
                 }
