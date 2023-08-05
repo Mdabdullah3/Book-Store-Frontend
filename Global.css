@@ -7,8 +7,8 @@
     U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 .background {
-  background-image: url(./src/assets/Background/background-20.jpg);
+  background-image: url(./src/assets/Background/background-01.jpg);
   background-position: left;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
 }

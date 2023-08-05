@@ -1,11 +1,11 @@
 import React from 'react';
-import featured from '../assets/img-02.png'
+import featured from '../assets/h3-img-book.png'
 import { AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
 const Features = () => {
     return (
         <div className='mt-28 w-11/12 mx-auto flex items-center justify-center'>
             <div className='flex-1'>
-                <img className='w-[440px] ml-20' src={featured} alt="" />
+                <img className='w-[640px] ml-20' src={featured} alt="" />
             </div>
             <div className='flex-1 mt-20'>
                 <h1 className='text-2xl tracking-wider text-primary -mt-4'>FEATURED BOOK</h1>
