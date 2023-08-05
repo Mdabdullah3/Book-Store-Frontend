@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import logo from "../../assets/Logo/logo-dark.png"
 const DesktopNav = () => {
     const navigation = <>
-        <li className=' text-secondary  cursor-pointer'><Link to='/home'
+        <li className=' text-secondary  cursor-pointer'><Link to='/'
             className='transition-all duration-300 uppercase'> Home</Link></li>
         <li className=' text-secondary  cursor-pointer uppercase'><Link to='/corporate'
             className='transition-all duration-300'>About </Link></li>
-        <li className=' text-secondary  cursor-pointer uppercase'><Link to='/nonprofit'
+        <li className=' text-secondary  cursor-pointer uppercase'><Link to='/shop'
             className='transition-all duration-300'> Shop</Link></li>
     </>
     const navigation2 = <>
