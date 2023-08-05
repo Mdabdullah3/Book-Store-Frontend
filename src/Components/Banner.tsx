@@ -21,7 +21,7 @@ const Banner = () => {
                     spaceBetween={30}
                     centeredSlides={true}
                     autoplay={{
-                        delay: 4099000,
+                        delay: 4000,
                         disableOnInteraction: false,
                     }}
                     modules={[Autoplay]}
