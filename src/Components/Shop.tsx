@@ -1,6 +1,7 @@
 import { IBooks } from '@/types/globalTypes';
 import React, { useEffect, useState } from 'react';
 import { AiTwotoneStar, AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
+import { Link } from 'react-router-dom';
 
 const Shop = () => {
     const [books, setBooks] = useState<IBooks[]>([])
@@ -20,7 +21,9 @@ const Shop = () => {
                         <p className='text-3xl font-medium text-secondary tracking-wider'>New Release Books</p>
                     </div>
                     <div>
-                        <button className=' border px-6 py-3 border-primary hover:bg-primary hover:text-white rounded-3xl text-md tracking-wider text-[#484848]'>View All</button>
+                        <Link to="/shop">
+
+                            <button className=' border px-6 py-3 border-primary hover:bg-primary hover:text-white rounded-3xl text-md tracking-wider text-[#484848]'>View All</button></Link>
                     </div>
 
                 </div>
