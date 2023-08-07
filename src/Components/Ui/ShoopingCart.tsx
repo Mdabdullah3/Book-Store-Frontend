@@ -35,15 +35,16 @@ const ShoopingCart = () => {
                                         </div>
                                         <div className="flex flex-col justify-between ml-4 flex-grow">
                                             <span className="font-bold text-sm">{item.name}</span>
-                                            <span className="text-red-500 text-xs">{item.genre[0]}</span>
+                                            <span className="text-red-500 text-xs">Quantity : {item?.quantity}</span>
                                             <a href="#" className="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
                                         </div>
                                     </div>
-                                    <div className="flex justify-center w-1/5">
+                                    <div className="flex justify-center w-1/5 items-center">
                                         <Button onClick={() => dispatch(addToCart(item))}>
                                             <></>
                                             <HiOutlinePlus size="20" />
                                         </Button>
+                                        <h1 className='text-xl px-3'> {item?.quantity}</h1>
                                         <Button onClick={() => dispatch(removeOne(item))}>
                                             <HiMinus size="20" />
                                         </Button>
@@ -64,7 +65,7 @@ const ShoopingCart = () => {
                             <h1 className="font-semibold text-2xl border-b pb-8">Order Summary</h1>
                             <div className="flex justify-between mt-10 mb-5">
                                 <span className="font-semibold text-sm uppercase">{product?.length ? product?.length : 0}</span>
-                                <span className="font-semibold text-sm">${total}</span>
+                                <span className="font-semibold text-sm">${(total.toFixed(2))}</span>
                             </div>
                             <div>
                                 <label className="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
@@ -75,7 +76,7 @@ const ShoopingCart = () => {
                             <div className="border-t mt-8">
                                 <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                                     <span>Total cost</span>
-                                    <span>{total ? total : 0}</span>
+                                    <span>{(total ? total : 0).toFixed(2)}</span>
                                 </div>
                                 <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
                             </div>
