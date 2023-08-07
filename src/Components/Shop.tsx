@@ -1,3 +1,5 @@
+import { addToCart } from '@/redux/features/cart';
+import { useAppDispatch } from '@/redux/hook';
 import { IBooks } from '@/types/globalTypes';
 import React, { useEffect, useState } from 'react';
 import { AiTwotoneStar, AiOutlineHeart, AiOutlineShoppingCart } from 'react-icons/ai';
@@ -12,6 +14,12 @@ const Shop = () => {
             .then(data => setBooks(data))
     }, [])
     console.log(books);
+
+    const dispatch = useAppDispatch()
+    const handleAddProduct = (book: IBooks) => {
+        dispatch(addToCart(book))
+        console.log("product added successfully");
+    }
     return (
         <div className='w-11/12 mx-auto bg-white mt-20'>
             <div className='w-10/12 mx-auto pt-10 '>
@@ -52,7 +60,7 @@ const Shop = () => {
                                 </h3>
                                 <h2 className='text-xl font-bold text-primary mt-3'>${book?.price}</h2>
                                 <div className='mb-20 flex items-center gap-4  w-11/12 mx-auto'>
-                                    <button className='border px-4 py-2 border-[#696969] hover:bg-primary hover:text-white rounded-3xl text-sm tracking-wider text-[#484848] mt-4'><h1 className='flex items-center gap-2'><AiOutlineShoppingCart />Add To Cart</h1></button>
+                                    <button onClick={() => handleAddProduct(book)} className='border px-4 py-2 border-[#696969] hover:bg-primary hover:text-white rounded-3xl text-sm tracking-wider text-[#484848] mt-4'><h1 className='flex items-center gap-2'><AiOutlineShoppingCart />Add To Cart</h1></button>
                                     <div className="transition-opacity absolute opacity-0 group-hover:opacity-100 top-1/4 right-1/4 p-2 bg-primary text-white">
                                         <button className="flex items-center gap-2">Add to Wishlist <AiOutlineHeart /> </button>
                                     </div>

@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import Home from '@/Pages/Home';
 import Shop from '@/Pages/Shop';
+import ShoopingCart from '@/Components/Ui/ShoopingCart';
 
 const routes = createBrowserRouter([
   {
@@ -34,10 +35,10 @@ const routes = createBrowserRouter([
     path: '/shop',
     element: <Shop />,
   },
-  // {
-  //   path: '/signup',
-  //   element: <Signup />,
-  // },
+  {
+    path: '/shoppingCart',
+    element: <ShoopingCart />,
+  },
   // {
   //   path: '*',
   //   element: <NotFound />,
