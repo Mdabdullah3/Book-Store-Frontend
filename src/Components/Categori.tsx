@@ -1,19 +1,21 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Slider } from './Ui/Slider';
 
-const Categori = () => {
+const Categori = (filterItem: any) => {
     const handleSlider = (value: number[]) => {
         console.log(value);
     };
     const priceRange = 100;
+
 
     return (
         <div>
             <div className='bg-white px-10 py-8 mt-20 w-52 shadow'>
                 <h1 className='text-xl text-secondary tracking-wide'> Categories</h1>
                 <h1 className='border mt-1 w-11/12 border-primary'></h1>
-                <div className='text-md text-secondary tracking-wider mt-3'>
-                    <h1 className='pt-2'>Drama</h1>
+                <div className='text-md text-secondary tracking-wider mt-3 cursor-pointer'>
+                    <h1 onClick={() => filterItem("Histroy")} className='pt-2 cur'>Drama</h1>
                     <h1 className='pt-2'>Fantasy</h1>
                     <h1 className='pt-2'>Fun</h1>
                     <h1 className='pt-2'>For Kid</h1>

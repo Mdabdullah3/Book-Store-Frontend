@@ -4,41 +4,63 @@ import Navbar from '@/layout/Navbar/Navbar';
 import React, { useEffect, useState } from 'react';
 import logo from "../assets/Logo/logo_250x80_crop_center@2x.webp"
 import { SlHandbag } from 'react-icons/sl';
-import Categori from '@/Components/Categori';
 import { IBooks } from '@/types/globalTypes';
-import { AiOutlineHeart, AiOutlineShoppingCart, AiTwotoneStar } from 'react-icons/ai';
-import { useAppDispatch, useAppSelector } from '@/redux/hook';
-import { addToCart } from '@/redux/features/cart';
+import { useAppSelector } from '@/redux/hook';
 import { Link } from 'react-router-dom';
-import notFound from "../assets/no-product-found.png"
+import ShopCard from '@/Components/ShopCard';
+import noProudct from "../assets/no-product-found.png"
 const Shop: React.FC = () => {
     const [books, setBooks] = useState<IBooks[]>([])
-
     const { product, total } = useAppSelector(state => state.cart)
     useEffect(() => {
         const url = 'data-for-db.json';
         fetch(url)
             .then(res => res.json())
-            .then(data => setBooks(data))
-    }, [])
-    const dispatch = useAppDispatch()
-    const handleAddProduct = (book: IBooks) => {
-        dispatch(addToCart(book))
-        console.log("product added successfully");
-    }
+            .then(data => {
+                // setItems(data)
+                setBooks(data)
 
-    const [filter, setFilter] = useState<string>("")
+            })
+    }, [])
+
+
+    // const dataSearch = books.filter((item: any) => {
+    //     return Object.keys(item).some((key) =>
+    //         item[key]
+    //             .toString()
+    //             .toLowerCase()
+    //             .includes(filter.toString().toLowerCase())
+    //     );
+    // });
+
+    // console.log(filter);
+
+    // const [items, setItems] = useState([...books]);
+
+    // const filterItem = (categItem: any) => {
+    //     const updatedItems = ([...items]).filter((item: any) => {
+    //         const data = item.genre.includes(categItem);
+    //         return data
+    //     });
+    //     return updatedItems
+    // };
+
+    const [searchFilter, setSearchFilter] = useState<string>("");
+    const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
+
     const searchEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setFilter(event.target.value);
+        setSearchFilter(event.target.value);
     };
 
-    let dataSearch = books.filter((item: any) => {
-        return Object.keys(item).some((key) =>
-            item[key]
-                .toString()
-                .toLowerCase()
-                .includes(filter.toString().toLowerCase())
+    const filteredBooks = books.filter((item: any) => {
+        const searchData = Object.values(item).some((value: any) =>
+            value.toString().toLowerCase().includes(searchFilter.toLowerCase())
         );
+
+        const categoryData =
+            categoryFilter === null || item.genre.includes(categoryFilter);
+
+        return searchData && categoryData;
     });
 
     return (
@@ -55,7 +77,7 @@ const Shop: React.FC = () => {
                             type="text"
                             className="placeholder-secondary border-none px-6 text-sm font-mono input py-4 w-full text-secondary"
                             placeholder="Search by title, author, or genre"
-                            value={filter}
+                            value={searchFilter}
                             onChange={searchEvent.bind(this)}
                         />
                         <h1 className="p-5 absolute uppercase -top-2 right-0 text-white bg-primary text-md ">
@@ -75,44 +97,42 @@ const Shop: React.FC = () => {
                         </div>
                     </div>
                 </div>
-
-
             </div>
             <div className='w-10/12 mx-auto flex justify-between '>
                 <div>
-                    <Categori />
+                    <div className='bg-white px-10 py-8 mt-20 w-52 shadow'>
+                        <h1 className='text-xl text-secondary tracking-wide'> Categories</h1>
+                        <h1 className='border mt-1 w-11/12 border-primary'></h1>
+                        <div className='text-md text-secondary tracking-wider mt-3 cursor-pointer'>
+                            <h1 onClick={() => setCategoryFilter("Drama")} className='pt-2 cur'>Drama</h1>
+                            <h1 onClick={() => setCategoryFilter("Fantasy")} className='pt-2'>Fantasy</h1>
+                            <h1 onClick={() => setCategoryFilter("Fun")} className='pt-2'>Fun</h1>
+                            <h1 onClick={() => setCategoryFilter("ForKid")} className='pt-2'>For Kid</h1>
+                            <h1 onClick={() => setCategoryFilter("Advancer")} className='pt-2'>Advancer</h1>
+                            <h1 onClick={() => setCategoryFilter("Science")} className='pt-2'>Science</h1>
+                            <h1 onClick={() => setCategoryFilter("History")} className='pt-2'>History</h1>
+                        </div>
+                        {/* <div className="space-y-3 mt-6">
+                            <h1 className="text-xl tracking-wider">Price Range</h1>
+                            <h1 className='border mt-1 w-11/12 border-primary'></h1>
+                            <div>From 0$ To {priceRange}$</div>
+
+                            <div className="max-w-xl">
+                                <Slider
+                                    defaultValue={[150]}
+                                    max={150}
+                                    min={0}
+                                    step={1}
+                                    onValueChange={(value) => handleSlider(value)}
+                                />
+                            </div>
+                        </div> */}
+                    </div>
                 </div>
                 <div className='ml-10 grid grid-cols-1 md:grid-cols-4 w-10/12 mx-auto mt-24 relative'>
-                    {
-                        dataSearch.length !== 0 ? dataSearch.map((book: IBooks) => <div key={book.id} className='mx-auto w-9/12 group relative overflow-hidden transition-transform transform hover:scale-105' >
-                            <div>
-                                <img className=' mb-6' src={book.image} alt="" />
-                            </div>
-                            <div>
-                                <h1 className='text-sm capitalize text-[#696969] tracking-wider my-2'>{book?.genre[0]}, {book?.genre[1]}, {book?.genre[2]}</h1>
-                                <h1 className='border w-10/12 border-[#6969692d]'></h1>
-                            </div>
-                            <div>
-                                <h1 className='text-md pt-3 w-10/12 text-secondary font-semibold tracking-wider'>{book?.name}</h1>
-                                <h2 className='pt-2 text-md tracking-wide text-[#696969]'>By: {book?.Author}</h2>
-                                <h3 className='flex items-center gap-2'>
-                                    {Array.from(Array(parseInt(book?.rating)), (e, i) => (
-                                        <AiTwotoneStar
-                                            key={i}
-                                            className="w-3 text-xl text-yellow-500"
-                                        />
-                                    ))}
-                                </h3>
-                                <h2 className='text-xl font-bold text-primary mt-3'>${book?.price}</h2>
-                                <div className='mb-20 flex items-center gap-4  w-11/12 mx-auto'>
-                                    <button onClick={() => handleAddProduct(book)} className='border px-4 py-2 border-[#696969] hover:bg-primary hover:text-white rounded-3xl text-sm tracking-wider text-[#484848] mt-4'><h1 className='flex items-center gap-2'><AiOutlineShoppingCart />Add To Cart</h1></button>
-                                    <div className="transition-opacity absolute opacity-0 group-hover:opacity-100 top-1/4 left-6 p-2 bg-primary text-white">
-                                        <button className="flex items-center gap-2">Add to Wishlist <AiOutlineHeart /> </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>) : <div>
-                            <img className=' absolute w-6/12 left-1/4' src={notFound} alt="" />
+                    {filteredBooks.length > 0 ?
+                        filteredBooks.map((book: IBooks) => <ShopCard book={book}></ShopCard>) : <div>
+                            <img className=' absolute w-9/12 left-40' src={noProudct} alt="" />
                         </div>
                     }
                 </div>

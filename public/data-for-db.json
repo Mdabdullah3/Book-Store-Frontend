@@ -18,7 +18,7 @@
     "title": "Social Flat Design",
     "image": "http://exprostudio.com/html/book_library/images/books/img-01.jpg",
     "price": 21.52,
-    "genre": ["Advancer", "Fun", "Histroy"],
+    "genre": ["Advancer", "Fun", "History"],
     "Author": "Cheng Xiao",
     "status": true,
     "rating": 5,

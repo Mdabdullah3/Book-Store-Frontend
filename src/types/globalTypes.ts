@@ -7,7 +7,7 @@ export interface IBooks {
   Author: string;
   status: boolean;
   rating: string;
-  genre: string[];
+  genre: string;
   Published: string;
   quantity?: number | undefined;
 }
