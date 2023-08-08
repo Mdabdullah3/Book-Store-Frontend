@@ -10,7 +10,7 @@ import { AiOutlineHeart, AiOutlineShoppingCart, AiTwotoneStar } from 'react-icon
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { addToCart } from '@/redux/features/cart';
 import { Link } from 'react-router-dom';
-
+import notFound from "../assets/no-product-found.png"
 const Shop: React.FC = () => {
     const [books, setBooks] = useState<IBooks[]>([])
 
@@ -54,7 +54,6 @@ const Shop: React.FC = () => {
                         <input
                             type="text"
                             className="placeholder-secondary border-none px-6 text-sm font-mono input py-4 w-full text-secondary"
-
                             placeholder="Search by title, author, or genre"
                             value={filter}
                             onChange={searchEvent.bind(this)}
@@ -83,9 +82,9 @@ const Shop: React.FC = () => {
                 <div>
                     <Categori />
                 </div>
-                <div className='ml-10 grid grid-cols-1 md:grid-cols-4 w-10/12 mx-auto mt-24'>
+                <div className='ml-10 grid grid-cols-1 md:grid-cols-4 w-10/12 mx-auto mt-24 relative'>
                     {
-                        dataSearch.map((book: IBooks) => <div key={book.id} className='mx-auto w-9/12 group relative overflow-hidden transition-transform transform hover:scale-105' >
+                        dataSearch.length !== 0 ? dataSearch.map((book: IBooks) => <div key={book.id} className='mx-auto w-9/12 group relative overflow-hidden transition-transform transform hover:scale-105' >
                             <div>
                                 <img className=' mb-6' src={book.image} alt="" />
                             </div>
@@ -112,7 +111,9 @@ const Shop: React.FC = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>)
+                        </div>) : <div>
+                            <img className=' absolute w-6/12 left-1/4' src={notFound} alt="" />
+                        </div>
                     }
                 </div>
             </div>
