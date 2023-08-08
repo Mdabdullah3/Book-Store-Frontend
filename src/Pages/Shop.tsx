@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable prefer-const */
 import Navbar from '@/layout/Navbar/Navbar';
 import React, { useEffect, useState } from 'react';
 import logo from "../assets/Logo/logo_250x80_crop_center@2x.webp"
@@ -8,7 +10,8 @@ import { AiOutlineHeart, AiOutlineShoppingCart, AiTwotoneStar } from 'react-icon
 import { useAppDispatch, useAppSelector } from '@/redux/hook';
 import { addToCart } from '@/redux/features/cart';
 import { Link } from 'react-router-dom';
-const Shop = () => {
+
+const Shop: React.FC = () => {
     const [books, setBooks] = useState<IBooks[]>([])
 
     const { product, total } = useAppSelector(state => state.cart)
@@ -23,7 +26,21 @@ const Shop = () => {
         dispatch(addToCart(book))
         console.log("product added successfully");
     }
-    console.log(product);
+
+    const [filter, setFilter] = useState<string>("")
+    const searchEvent = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFilter(event.target.value);
+    };
+
+    let dataSearch = books.filter((item: any) => {
+        return Object.keys(item).some((key) =>
+            item[key]
+                .toString()
+                .toLowerCase()
+                .includes(filter.toString().toLowerCase())
+        );
+    });
+
     return (
         <div>
             <Navbar />
@@ -36,9 +53,11 @@ const Shop = () => {
                     <div className="bg-info border-b-2 border-primary relative overflow-hidden w-5/12 p-0 mx-auto">
                         <input
                             type="text"
-                            className=" placeholder-secondary border-none px-6 text-xl font-mono input py-4 w-full text-secondary"
+                            className="placeholder-secondary border-none px-6 text-sm font-mono input py-4 w-full text-secondary"
 
-                            placeholder="Search Your Books"
+                            placeholder="Search by title, author, or genre"
+                            value={filter}
+                            onChange={searchEvent.bind(this)}
                         />
                         <h1 className="p-5 absolute uppercase -top-2 right-0 text-white bg-primary text-md ">
                             Search
@@ -66,7 +85,7 @@ const Shop = () => {
                 </div>
                 <div className='ml-10 grid grid-cols-1 md:grid-cols-4 w-10/12 mx-auto mt-24'>
                     {
-                        books.map((book: IBooks) => <div key={book.id} className='mx-auto w-9/12 group relative overflow-hidden transition-transform transform hover:scale-105' >
+                        dataSearch.map((book: IBooks) => <div key={book.id} className='mx-auto w-9/12 group relative overflow-hidden transition-transform transform hover:scale-105' >
                             <div>
                                 <img className=' mb-6' src={book.image} alt="" />
                             </div>
