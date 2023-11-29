@@ -13,7 +13,6 @@ const Shop = () => {
             .then(res => res.json())
             .then(data => setBooks(data))
     }, [])
-    console.log(books);
 
     const dispatch = useAppDispatch()
     const handleAddProduct = (book: IBooks) => {
